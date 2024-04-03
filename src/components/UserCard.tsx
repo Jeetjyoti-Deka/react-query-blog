@@ -1,12 +1,12 @@
-type UserCardProps = {
-  name: string;
-  street: string;
-  city: string;
-  company: string;
-  email: string;
-};
+import { User } from "../lib/types";
 
-const UserCard = ({ name, street, city, company, email }: UserCardProps) => {
+const UserCard = ({
+  name = "xxx",
+  street = "xxx",
+  city = "xxx",
+  company = "xxx",
+  email = "xxx",
+}: User) => {
   return (
     <div className="w-72 rounded-[8px] overflow-hidden bg-slate-400 justify-self-center">
       <div className="w-full h-24 bg-slate-800 relative">

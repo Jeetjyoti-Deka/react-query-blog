@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { getUsers } from "./lib/utils";
 import UserCard from "./components/UserCard";
 import Loading from "./components/Loading";
+import UserForm from "./components/UserForm";
 
 function App() {
   const { isLoading, isError, data, error } = useQuery({
-    queryKey: ["todos"],
+    queryKey: ["users"],
     queryFn: getUsers,
   });
 
@@ -19,9 +20,9 @@ function App() {
     return <h2>Something went wrong.</h2>;
   }
 
-  if (data) {
-    console.log(data.data);
-  }
+  // if (data) {
+  //   console.log(data.data);
+  // }
 
   return (
     <div>
@@ -39,6 +40,9 @@ function App() {
               email={user.email}
             />
           ))}
+      </div>
+      <div>
+        <UserForm />
       </div>
     </div>
   );

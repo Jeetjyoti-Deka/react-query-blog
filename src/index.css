@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer {
+  .form_input {
+    @apply rounded-[4px] outline-none text-lg;
+  }
+}

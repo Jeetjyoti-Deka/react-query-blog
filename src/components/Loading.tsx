@@ -8,7 +8,6 @@ const Loading = () => {
           className="object-contain w-full"
         />
       </div>
-      {/* <h2>Loading...</h2> */}
     </div>
   );
 };

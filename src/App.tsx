@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUsers } from "./lib/utils";
 import UserCard from "./components/UserCard";
+import Loading from "./components/Loading";
 
 function App() {
   const { isLoading, isError, data, error } = useQuery({
@@ -9,7 +10,7 @@ function App() {
   });
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <Loading />;
   }
 
   if (isError) {

@@ -30,7 +30,12 @@ const UserForm = ({
   }, [mutation.isSuccess, setUsers, mutation.data]);
 
   return (
-    <div className="flex items-center justify-center my-10 px-4">
+    <div className="flex flex-col gap-y-4 items-center justify-center my-10 px-4">
+      <div>
+        {mutation.isError && <p>{mutation.error.message}</p>}
+        {mutation.isPending && <p>Adding User...</p>}
+        {mutation.isSuccess && <p>User Added Successfully.</p>}
+      </div>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-y-3 w-full max-w-[500px] bg-slate-500 p-6 rounded-[8px]"

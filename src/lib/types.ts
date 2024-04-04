@@ -4,4 +4,5 @@ export type User = {
   city?: string;
   company?: string;
   email?: string;
+  id?: number;
 };

@@ -1,22 +1,21 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { createUser } from "../lib/utils";
+import { User } from "../lib/types";
 
-const UserForm = () => {
+const UserForm = ({
+  setUsers,
+}: {
+  setUsers: React.Dispatch<React.SetStateAction<User[] | null>>;
+}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
   const [company, setCompany] = useState("");
 
-  const queryClient = useQueryClient();
-
   const mutation = useMutation({
     mutationFn: createUser,
-    onSuccess: () => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["users"] });
-    },
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,9 +23,11 @@ const UserForm = () => {
     mutation.mutate({ name, city, company, email, street });
   };
 
-  if (mutation.isSuccess) {
-    console.log(mutation.data);
-  }
+  useEffect(() => {
+    if (mutation.isSuccess) {
+      setUsers((prev) => [...prev!, mutation.data.data]);
+    }
+  }, [mutation.isSuccess, setUsers, mutation.data]);
 
   return (
     <div className="flex items-center justify-center my-10 px-4">
